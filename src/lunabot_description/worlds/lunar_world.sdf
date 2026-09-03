@@ -1,0 +1,600 @@
+<?xml version="1.0" ?>
+<sdf version="1.10">
+
+  <world name="luna_world">
+
+    <!-- ===================================================== -->
+    <!-- MOON GRAVITY                                         -->
+    <!-- ===================================================== -->
+
+    <gravity>0 0 -1.62</gravity>
+
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+
+
+    <!-- ===================================================== -->
+    <!-- GAZEBO SYSTEMS                                       -->
+    <!-- ===================================================== -->
+
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics"/>
+
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands"/>
+
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster"/>
+
+
+    <!-- ===================================================== -->
+    <!-- MOON SUN                                             -->
+    <!-- ===================================================== -->
+
+    <light
+      name="sun"
+      type="directional">
+
+      <pose>0 0 100 0.4 -0.5 0</pose>
+
+      <cast_shadows>true</cast_shadows>
+
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+
+      <direction>-0.4 0.2 -1</direction>
+
+    </light>
+
+
+    <!-- ===================================================== -->
+    <!-- LUNAR GROUND                                         -->
+    <!-- ===================================================== -->
+
+    <model name="lunar_ground">
+
+      <static>true</static>
+
+      <link name="ground">
+
+        <!-- Ground collision -->
+
+        <collision name="collision">
+
+          <geometry>
+
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+
+          </geometry>
+
+        </collision>
+
+
+        <!-- Ground visual -->
+
+        <visual name="visual">
+
+          <geometry>
+
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.20 0.19 0.18 1</ambient>
+            <diffuse>0.32 0.31 0.29 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+
+          </material>
+
+        </visual>
+
+      </link>
+
+    </model>
+
+
+    <!-- ===================================================== -->
+    <!-- SMALL LUNAR ROCK 01                                  -->
+    <!-- ===================================================== -->
+
+    <model name="rock_01">
+
+      <static>true</static>
+
+      <pose>8 4 0.45 0 0.2 0.4</pose>
+
+      <link name="rock">
+
+        <collision name="collision">
+
+          <geometry>
+
+            <sphere>
+              <radius>0.45</radius>
+            </sphere>
+
+          </geometry>
+
+        </collision>
+
+        <visual name="visual">
+
+          <geometry>
+
+            <sphere>
+              <radius>0.45</radius>
+            </sphere>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.16 0.15 0.14 1</ambient>
+            <diffuse>0.25 0.24 0.22 1</diffuse>
+
+          </material>
+
+        </visual>
+
+      </link>
+
+    </model>
+
+
+    <!-- ===================================================== -->
+    <!-- SMALL LUNAR ROCK 02                                  -->
+    <!-- ===================================================== -->
+
+    <model name="rock_02">
+
+      <static>true</static>
+
+      <pose>-7 6 0.65 0.2 0.1 1</pose>
+
+      <link name="rock">
+
+        <collision name="collision">
+
+          <geometry>
+
+            <sphere>
+              <radius>0.65</radius>
+            </sphere>
+
+          </geometry>
+
+        </collision>
+
+        <visual name="visual">
+
+          <geometry>
+
+            <sphere>
+              <radius>0.65</radius>
+            </sphere>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.13 0.13 0.12 1</ambient>
+            <diffuse>0.22 0.21 0.20 1</diffuse>
+
+          </material>
+
+        </visual>
+
+      </link>
+
+    </model>
+
+
+    <!-- ===================================================== -->
+    <!-- SMALL LUNAR ROCK 03                                  -->
+    <!-- ===================================================== -->
+
+    <model name="rock_03">
+
+      <static>true</static>
+
+      <pose>12 -8 0.55 0.1 0.3 0.8</pose>
+
+      <link name="rock">
+
+        <collision name="collision">
+
+          <geometry>
+
+            <sphere>
+              <radius>0.55</radius>
+            </sphere>
+
+          </geometry>
+
+        </collision>
+
+        <visual name="visual">
+
+          <geometry>
+
+            <sphere>
+              <radius>0.55</radius>
+            </sphere>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.18 0.17 0.16 1</ambient>
+            <diffuse>0.28 0.27 0.25 1</diffuse>
+
+          </material>
+
+        </visual>
+
+      </link>
+
+    </model>
+
+
+    <!-- ===================================================== -->
+    <!-- LARGE LUNAR ROCK                                    -->
+    <!-- ===================================================== -->
+
+    <model name="large_rock">
+
+      <static>true</static>
+
+      <pose>-15 -10 1.2 0.2 0.4 0.2</pose>
+
+      <link name="rock">
+
+        <collision name="collision">
+
+          <geometry>
+
+            <sphere>
+              <radius>1.2</radius>
+            </sphere>
+
+          </geometry>
+
+        </collision>
+
+        <visual name="visual">
+
+          <geometry>
+
+            <sphere>
+              <radius>1.2</radius>
+            </sphere>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.12 0.12 0.11 1</ambient>
+            <diffuse>0.20 0.19 0.18 1</diffuse>
+
+          </material>
+
+        </visual>
+
+      </link>
+
+    </model>
+
+
+    <!-- ===================================================== -->
+    <!-- LARGE LUNAR CRATER 01                               -->
+    <!-- ===================================================== -->
+
+    <model name="crater_01">
+
+      <static>true</static>
+
+      <pose>18 8 0 0 0 0</pose>
+
+      <link name="crater">
+
+
+        <!-- =============================== -->
+        <!-- DARK CRATER FLOOR               -->
+        <!-- =============================== -->
+
+        <visual name="floor">
+
+          <pose>0 0 0.015 0 0 0</pose>
+
+          <geometry>
+
+            <cylinder>
+              <radius>5.0</radius>
+              <length>0.03</length>
+            </cylinder>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.055 0.055 0.05 1</ambient>
+            <diffuse>0.10 0.10 0.09 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+
+          </material>
+
+        </visual>
+
+
+        <!-- =============================== -->
+        <!-- CRATER RIM SEGMENT 01           -->
+        <!-- =============================== -->
+
+        <visual name="rim_01">
+
+          <pose>0 5.4 0.20 0 0 0</pose>
+
+          <geometry>
+
+            <box>
+              <size>7.0 1.0 0.40</size>
+            </box>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.17 0.16 0.15 1</ambient>
+            <diffuse>0.27 0.26 0.24 1</diffuse>
+
+          </material>
+
+        </visual>
+
+
+        <!-- =============================== -->
+        <!-- CRATER RIM SEGMENT 02           -->
+        <!-- =============================== -->
+
+        <visual name="rim_02">
+
+          <pose>0 -5.4 0.20 0 0 0</pose>
+
+          <geometry>
+
+            <box>
+              <size>7.0 1.0 0.40</size>
+            </box>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.17 0.16 0.15 1</ambient>
+            <diffuse>0.27 0.26 0.24 1</diffuse>
+
+          </material>
+
+        </visual>
+
+
+        <!-- =============================== -->
+        <!-- CRATER RIM SEGMENT 03           -->
+        <!-- =============================== -->
+
+        <visual name="rim_03">
+
+          <pose>5.4 0 0.20 0 0 1.5708</pose>
+
+          <geometry>
+
+            <box>
+              <size>7.0 1.0 0.40</size>
+            </box>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.17 0.16 0.15 1</ambient>
+            <diffuse>0.27 0.26 0.24 1</diffuse>
+
+          </material>
+
+        </visual>
+
+
+        <!-- =============================== -->
+        <!-- CRATER RIM SEGMENT 04           -->
+        <!-- =============================== -->
+
+        <visual name="rim_04">
+
+          <pose>-5.4 0 0.20 0 0 1.5708</pose>
+
+          <geometry>
+
+            <box>
+              <size>7.0 1.0 0.40</size>
+            </box>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.17 0.16 0.15 1</ambient>
+            <diffuse>0.27 0.26 0.24 1</diffuse>
+
+          </material>
+
+        </visual>
+
+
+      </link>
+
+    </model>
+
+
+    <!-- ===================================================== -->
+    <!-- SMALL LUNAR CRATER 02                               -->
+    <!-- ===================================================== -->
+
+    <model name="crater_02">
+
+      <static>true</static>
+
+      <pose>-18 -5 0 0 0 0</pose>
+
+      <link name="crater">
+
+
+        <!-- Dark floor -->
+
+        <visual name="floor">
+
+          <pose>0 0 0.015 0 0 0</pose>
+
+          <geometry>
+
+            <cylinder>
+              <radius>3.0</radius>
+              <length>0.03</length>
+            </cylinder>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.06 0.06 0.055 1</ambient>
+            <diffuse>0.12 0.12 0.11 1</diffuse>
+
+          </material>
+
+        </visual>
+
+
+        <!-- Rim 01 -->
+
+        <visual name="rim_01">
+
+          <pose>0 3.3 0.15 0 0 0</pose>
+
+          <geometry>
+
+            <box>
+              <size>4.5 0.7 0.30</size>
+            </box>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.16 0.15 0.14 1</ambient>
+            <diffuse>0.25 0.24 0.22 1</diffuse>
+
+          </material>
+
+        </visual>
+
+
+        <!-- Rim 02 -->
+
+        <visual name="rim_02">
+
+          <pose>0 -3.3 0.15 0 0 0</pose>
+
+          <geometry>
+
+            <box>
+              <size>4.5 0.7 0.30</size>
+            </box>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.16 0.15 0.14 1</ambient>
+            <diffuse>0.25 0.24 0.22 1</diffuse>
+
+          </material>
+
+        </visual>
+
+
+        <!-- Rim 03 -->
+
+        <visual name="rim_03">
+
+          <pose>3.3 0 0.15 0 0 1.5708</pose>
+
+          <geometry>
+
+            <box>
+              <size>4.5 0.7 0.30</size>
+            </box>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.16 0.15 0.14 1</ambient>
+            <diffuse>0.25 0.24 0.22 1</diffuse>
+
+          </material>
+
+        </visual>
+
+
+        <!-- Rim 04 -->
+
+        <visual name="rim_04">
+
+          <pose>-3.3 0 0.15 0 0 1.5708</pose>
+
+          <geometry>
+
+            <box>
+              <size>4.5 0.7 0.30</size>
+            </box>
+
+          </geometry>
+
+          <material>
+
+            <ambient>0.16 0.15 0.14 1</ambient>
+            <diffuse>0.25 0.24 0.22 1</diffuse>
+
+          </material>
+
+        </visual>
+
+
+      </link>
+
+    </model>
+
+
+  </world>
+
+</sdf>
