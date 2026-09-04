@@ -1,167 +1,332 @@
+cd ~/lunabot_ws/web
+
+cat > index.html <<'EOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LunaBot - Lunar Rover</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LunaBot Mission Control</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111827;
-      color: white;
-      text-align: center;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    header {
-      padding: 25px;
-      background: #1f2937;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1220;
+  color: #f8fafc;
+}
 
-    h1 {
-      margin: 0;
-      font-size: 40px;
-    }
+header {
+  background: #151f32;
+  padding: 18px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #334155;
+}
 
-    .status {
-      margin-top: 10px;
-      color: #86efac;
-    }
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
 
-    .moon {
-      position: relative;
-      width: 90%;
-      max-width: 900px;
-      height: 420px;
-      margin: 30px auto;
-      overflow: hidden;
-      border-radius: 20px;
-      background:
-        radial-gradient(circle at 20% 30%, #777 0 25px, transparent 26px),
-        radial-gradient(circle at 70% 65%, #777 0 35px, transparent 36px),
-        radial-gradient(circle at 45% 80%, #666 0 20px, transparent 21px),
-        #4b5563;
-      border: 3px solid #6b7280;
-    }
+.status {
+  color: #4ade80;
+  font-weight: bold;
+}
 
-    .rover {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 70px;
-      transition: left 0.2s, top 0.2s;
-    }
+.dashboard {
+  max-width: 1200px;
+  margin: 25px auto;
+  padding: 0 20px;
+}
 
-    .controls {
-      display: grid;
-      grid-template-columns: 100px 100px 100px;
-      gap: 10px;
-      justify-content: center;
-      margin: 20px;
-    }
+.mission {
+  background: #182235;
+  border: 1px solid #334155;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
 
-    button {
-      padding: 18px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background: #374151;
-      color: white;
-    }
+.mission h2 {
+  margin-top: 0;
+}
 
-    button:hover {
-      background: #4b5563;
-    }
+.moon {
+  position: relative;
+  height: 430px;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 2px solid #475569;
+  background:
+    radial-gradient(circle at 15% 25%, #737b88 0 28px, transparent 29px),
+    radial-gradient(circle at 78% 35%, #697281 0 45px, transparent 46px),
+    radial-gradient(circle at 55% 78%, #737b88 0 25px, transparent 26px),
+    radial-gradient(circle at 30% 72%, #626b79 0 18px, transparent 19px),
+    #4b5563;
+}
 
-    .stop {
-      background: #b91c1c;
-    }
+.rover {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 65px;
+  transition: left .2s, top .2s;
+}
 
-    .info {
-      margin: 20px auto;
-      max-width: 500px;
-      padding: 15px;
-      background: #1f2937;
-      border-radius: 12px;
-    }
-  </style>
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #182235;
+  border: 1px solid #334155;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 90px 90px 90px;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  height: 65px;
+  border: 0;
+  border-radius: 12px;
+  background: #334155;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #475569;
+  transform: scale(1.03);
+}
+
+.stop {
+  background: #dc2626;
+}
+
+.stop:hover {
+  background: #ef4444;
+}
+
+.info {
+  display: grid;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #0f172a;
+  border-radius: 8px;
+}
+
+.bar {
+  height: 12px;
+  background: #334155;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.battery {
+  height: 100%;
+  width: 87%;
+  background: #4ade80;
+}
+
+.speed {
+  width: 100%;
+}
+
+footer {
+  text-align: center;
+  color: #94a3b8;
+  padding: 30px;
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .moon {
+    height: 330px;
+  }
+
+  header {
+    padding: 15px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>🌙 LunaBot</h1>
-  <div class="status">🟢 Rover Online — Web Demo</div>
+  <div class="logo">🌙 LunaBot</div>
+  <div class="status">🟢 ONLINE</div>
 </header>
 
-<div class="moon">
-  <div id="rover" class="rover">🤖</div>
+<div class="dashboard">
+
+  <section class="mission">
+    <h2>🚀 Lunar Mission Control</h2>
+    <p>Interactive lunar rover simulation</p>
+  </section>
+
+  <section class="moon">
+    <div id="rover" class="rover">🤖</div>
+  </section>
+
+  <div class="grid">
+
+    <section class="card">
+      <h3>🎮 Rover Controls</h3>
+
+      <div class="controls">
+        <div></div>
+        <button onclick="move('up')">⬆️</button>
+        <div></div>
+
+        <button onclick="move('left')">⬅️</button>
+        <button class="stop" onclick="stopRover()">⏹️</button>
+        <button onclick="move('right')">➡️</button>
+
+        <div></div>
+        <button onclick="move('down')">⬇️</button>
+        <div></div>
+      </div>
+
+      <p style="text-align:center">
+        Keyboard: <b>W A S D</b> / Arrow Keys
+      </p>
+    </section>
+
+    <section class="card">
+      <h3>📊 Rover Telemetry</h3>
+
+      <div class="info">
+        <div class="info-row">
+          <span>Direction</span>
+          <strong id="direction">Stopped</strong>
+        </div>
+
+        <div class="info-row">
+          <span>Position</span>
+          <strong id="position">50%, 50%</strong>
+        </div>
+
+        <div class="info-row">
+          <span>Speed</span>
+          <strong id="speedText">50%</strong>
+        </div>
+
+        <div class="info-row">
+          <span>Battery</span>
+          <strong>87%</strong>
+        </div>
+
+        <div class="bar">
+          <div class="battery"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="card" style="margin-top:20px">
+    <h3>⚙️ Rover Speed</h3>
+    <input
+      class="speed"
+      id="speed"
+      type="range"
+      min="10"
+      max="100"
+      value="50"
+      oninput="updateSpeed()"
+    >
+  </section>
+
 </div>
 
-<div class="controls">
-  <div></div>
-  <button onclick="move('up')">⬆️</button>
-  <div></div>
-
-  <button onclick="move('left')">⬅️</button>
-  <button class="stop" onclick="stopRover()">⏹️</button>
-  <button onclick="move('right')">➡️</button>
-
-  <div></div>
-  <button onclick="move('down')">⬇️</button>
-  <div></div>
-</div>
-
-<div class="info">
-  <h2>Rover Information</h2>
-  <p>Direction: <span id="direction">Stopped</span></p>
-  <p>Position: <span id="position">50%, 50%</span></p>
-</div>
+<footer>
+  LunaBot • ROS 2 Jazzy • Gazebo Harmonic
+</footer>
 
 <script>
-  let x = 50;
-  let y = 50;
+let x = 50;
+let y = 50;
+let speed = 50;
 
-  const rover = document.getElementById("rover");
-  const direction = document.getElementById("direction");
-  const position = document.getElementById("position");
+const rover = document.getElementById("rover");
+const direction = document.getElementById("direction");
+const position = document.getElementById("position");
+const speedText = document.getElementById("speedText");
 
-  function move(dir) {
-    const step = 3;
+function move(dir) {
 
-    if (dir === "up") y -= step;
-    if (dir === "down") y += step;
-    if (dir === "left") x -= step;
-    if (dir === "right") x += step;
+  const step = 1 + speed / 25;
 
-    x = Math.max(8, Math.min(92, x));
-    y = Math.max(12, Math.min(88, y));
+  if (dir === "up") y -= step;
+  if (dir === "down") y += step;
+  if (dir === "left") x -= step;
+  if (dir === "right") x += step;
 
-    rover.style.left = x + "%";
-    rover.style.top = y + "%";
+  x = Math.max(8, Math.min(92, x));
+  y = Math.max(12, Math.min(88, y));
 
-    direction.textContent =
-      dir.charAt(0).toUpperCase() + dir.slice(1);
+  rover.style.left = x + "%";
+  rover.style.top = y + "%";
 
-    position.textContent =
-      Math.round(x) + "%, " + Math.round(y) + "%";
-  }
+  direction.textContent =
+    dir.charAt(0).toUpperCase() + dir.slice(1);
 
-  function stopRover() {
-    direction.textContent = "Stopped";
-  }
+  position.textContent =
+    Math.round(x) + "%, " + Math.round(y) + "%";
+}
 
-  document.addEventListener("keydown", function(event) {
-    if (event.key === "ArrowUp" || event.key.toLowerCase() === "w") move("up");
-    if (event.key === "ArrowDown" || event.key.toLowerCase() === "s") move("down");
-    if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") move("left");
-    if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") move("right");
-    if (event.key === " ") stopRover();
-  });
+function stopRover() {
+  direction.textContent = "Stopped";
+}
+
+function updateSpeed() {
+  speed = document.getElementById("speed").value;
+  speedText.textContent = speed + "%";
+}
+
+document.addEventListener("keydown", function(event) {
+
+  const key = event.key.toLowerCase();
+
+  if (event.key === "ArrowUp" || key === "w") move("up");
+  if (event.key === "ArrowDown" || key === "s") move("down");
+  if (event.key === "ArrowLeft" || key === "a") move("left");
+  if (event.key === "ArrowRight" || key === "d") move("right");
+
+  if (event.code === "Space") stopRover();
+});
 </script>
 
 </body>
 </html>
+EOF
