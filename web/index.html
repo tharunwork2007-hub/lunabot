@@ -4,15 +4,164 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LunaBot - Lunar Rover</title>
-</head>
-<body>
-  <h1>🌙 LunaBot</h1>
-  <p>Interactive lunar rover web demo</p>
 
-  <button onclick="alert('Forward')">⬆️ Forward</button>
-  <button onclick="alert('Left')">⬅️ Left</button>
-  <button onclick="alert('Stop')">⏹️ Stop</button>
-  <button onclick="alert('Right')">➡️ Right</button>
-  <button onclick="alert('Backward')">⬇️ Backward</button>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 25px;
+      background: #1f2937;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 40px;
+    }
+
+    .status {
+      margin-top: 10px;
+      color: #86efac;
+    }
+
+    .moon {
+      position: relative;
+      width: 90%;
+      max-width: 900px;
+      height: 420px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 20% 30%, #777 0 25px, transparent 26px),
+        radial-gradient(circle at 70% 65%, #777 0 35px, transparent 36px),
+        radial-gradient(circle at 45% 80%, #666 0 20px, transparent 21px),
+        #4b5563;
+      border: 3px solid #6b7280;
+    }
+
+    .rover {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 70px;
+      transition: left 0.2s, top 0.2s;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 100px 100px 100px;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    button {
+      padding: 18px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #374151;
+      color: white;
+    }
+
+    button:hover {
+      background: #4b5563;
+    }
+
+    .stop {
+      background: #b91c1c;
+    }
+
+    .info {
+      margin: 20px auto;
+      max-width: 500px;
+      padding: 15px;
+      background: #1f2937;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌙 LunaBot</h1>
+  <div class="status">🟢 Rover Online — Web Demo</div>
+</header>
+
+<div class="moon">
+  <div id="rover" class="rover">🤖</div>
+</div>
+
+<div class="controls">
+  <div></div>
+  <button onclick="move('up')">⬆️</button>
+  <div></div>
+
+  <button onclick="move('left')">⬅️</button>
+  <button class="stop" onclick="stopRover()">⏹️</button>
+  <button onclick="move('right')">➡️</button>
+
+  <div></div>
+  <button onclick="move('down')">⬇️</button>
+  <div></div>
+</div>
+
+<div class="info">
+  <h2>Rover Information</h2>
+  <p>Direction: <span id="direction">Stopped</span></p>
+  <p>Position: <span id="position">50%, 50%</span></p>
+</div>
+
+<script>
+  let x = 50;
+  let y = 50;
+
+  const rover = document.getElementById("rover");
+  const direction = document.getElementById("direction");
+  const position = document.getElementById("position");
+
+  function move(dir) {
+    const step = 3;
+
+    if (dir === "up") y -= step;
+    if (dir === "down") y += step;
+    if (dir === "left") x -= step;
+    if (dir === "right") x += step;
+
+    x = Math.max(8, Math.min(92, x));
+    y = Math.max(12, Math.min(88, y));
+
+    rover.style.left = x + "%";
+    rover.style.top = y + "%";
+
+    direction.textContent =
+      dir.charAt(0).toUpperCase() + dir.slice(1);
+
+    position.textContent =
+      Math.round(x) + "%, " + Math.round(y) + "%";
+  }
+
+  function stopRover() {
+    direction.textContent = "Stopped";
+  }
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowUp" || event.key.toLowerCase() === "w") move("up");
+    if (event.key === "ArrowDown" || event.key.toLowerCase() === "s") move("down");
+    if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") move("left");
+    if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") move("right");
+    if (event.key === " ") stopRover();
+  });
+</script>
+
 </body>
 </html>
