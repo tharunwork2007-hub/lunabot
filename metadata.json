@@ -1,0 +1,6 @@
+{
+  "name": "LunaBot Mission Control",
+  "description": "Autonomous Lunar Rover Operations Center - aerospace mission control interface with real-time telemetry, 3D terrain simulation, autonomous navigation, and subsystem diagnostics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

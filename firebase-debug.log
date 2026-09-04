@@ -1,0 +1,40 @@
+[debug] [2026-08-28T12:04:22.836Z] ----------------------------------------------------------------------
+[debug] [2026-08-28T12:04:22.838Z] Command:       C:\Program Files\nodejs\node.exe D:\npm-cache\_npx\7750544ccf494d8b\node_modules\firebase-tools\lib\bin\firebase.js projects:create lunabot-moon-rover
+[debug] [2026-08-28T12:04:22.838Z] CLI Version:   15.28.2
+[debug] [2026-08-28T12:04:22.838Z] Platform:      win32
+[debug] [2026-08-28T12:04:22.838Z] Node Version:  v24.14.1
+[debug] [2026-08-28T12:04:22.838Z] Detected Agent: unknown
+[debug] [2026-08-28T12:04:22.838Z] Time:          Fri Aug 28 2026 17:34:22 GMT+0530 (India Standard Time)
+[debug] [2026-08-28T12:04:22.838Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-08-28T12:04:22.845Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-08-28T12:04:22.845Z] > authorizing via signed-in user (tharunkumary2@gmail.com)
+[debug] [2026-08-28T12:05:00.368Z] Checked if tokens are valid: true, expires at: 1787922135786
+[debug] [2026-08-28T12:05:00.368Z] Checked if tokens are valid: true, expires at: 1787922135786
+[debug] [2026-08-28T12:05:00.369Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-08-28T12:05:00.369Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"lunabot-moon-rover","name":"lunabot-moon-rover"}
+[debug] [2026-08-28T12:05:01.986Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2026-08-28T12:05:01.986Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.8927606831340151845"}
+[debug] [2026-08-28T12:05:01.987Z] Checked if tokens are valid: true, expires at: 1787922135786
+[debug] [2026-08-28T12:05:01.987Z] Checked if tokens are valid: true, expires at: 1787922135786
+[debug] [2026-08-28T12:05:01.988Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.8927606831340151845 [none]
+[debug] [2026-08-28T12:05:03.318Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.8927606831340151845 200
+[debug] [2026-08-28T12:05:03.318Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.8927606831340151845 {"name":"operations/create_project.global.8927606831340151845"}
+[debug] [2026-08-28T12:05:03.835Z] [Project Creation Poller] Retrying task index 0
+[debug] [2026-08-28T12:05:03.836Z] Checked if tokens are valid: true, expires at: 1787922135786
+[debug] [2026-08-28T12:05:03.836Z] Checked if tokens are valid: true, expires at: 1787922135786
+[debug] [2026-08-28T12:05:03.836Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.8927606831340151845 [none]
+[debug] [2026-08-28T12:05:04.161Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.8927606831340151845 200
+[debug] [2026-08-28T12:05:04.161Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.8927606831340151845 {"name":"operations/create_project.global.8927606831340151845","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","gettable":true,"ready":true},"done":true,"response":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.Project","projectNumber":"796331428239","projectId":"lunabot-moon-rover","lifecycleState":"ACTIVE","name":"lunabot-moon-rover","createTime":"2026-08-28T12:05:02.573Z"}}
+[debug] [2026-08-28T12:05:04.164Z] Checked if tokens are valid: true, expires at: 1787922135786
+[debug] [2026-08-28T12:05:04.164Z] Checked if tokens are valid: true, expires at: 1787922135786
+[debug] [2026-08-28T12:05:04.164Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1beta1/projects/lunabot-moon-rover:addFirebase [none]
+[debug] [2026-08-28T12:05:05.719Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1beta1/projects/lunabot-moon-rover:addFirebase 403
+[debug] [2026-08-28T12:05:05.720Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1beta1/projects/lunabot-moon-rover:addFirebase {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-08-28T12:05:05.721Z] Request to https://firebase.googleapis.com/v1beta1/projects/lunabot-moon-rover:addFirebase had HTTP Error: 403, The caller does not have permission
+[debug] [2026-08-28T12:05:05.724Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/lunabot-moon-rover:addFirebase had HTTP Error: 403, The caller does not have permission
+    at responseToError (D:\npm-cache\_npx\7750544ccf494d8b\node_modules\firebase-tools\lib\responseToError.js:53:12)
+    at RetryOperation._fn (D:\npm-cache\_npx\7750544ccf494d8b\node_modules\firebase-tools\lib\apiv2.js:415:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+[error] 
+[error] Error: Failed to add Firebase to Google Cloud Platform project. See firebase-debug.log for more info.

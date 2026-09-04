@@ -1,24 +1,20 @@
-# LunaBot
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+</div>
 
-LunaBot is a lunar rover simulation built with **ROS 2 Jazzy** and **Gazebo Harmonic**.
+# Run and deploy your AI Studio app
 
-## Features
+This contains everything you need to run your app locally.
 
-- Lunar gravity simulation
-- Rover model with wheels
-- Lunar terrain
-- Rocks and craters
-- ROS 2 velocity control
-- Odometry
+View your app in AI Studio: https://ai.studio/apps/5563be34-1c31-4926-8812-61d51708f414
 
-## Package
+## Run Locally
 
-`lunabot_description`
+**Prerequisites:**  Node.js
 
-## Build
 
-```bash
-cd ~/lunabot_ws
-colcon build
-source install/setup.bash
-
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
